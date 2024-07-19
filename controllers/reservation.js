@@ -90,3 +90,12 @@ export const cancelReservation = async (req, res) => {
     console.error('Error canceling reservation:', error);
   }
 }
+
+export const getAllReservations = async (req, res) => {
+    try {
+      const reservations = await Reservation.find().populate("parkingSpot"); 
+      res.status(200).json(reservations);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
