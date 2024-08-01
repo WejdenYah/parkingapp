@@ -4,11 +4,14 @@ import {
   deleteUser,
   getUser,
   getUsers,
-   
+  countUsers,
+  
 } from "../controllers/user.js";
 import { verifyToken, verifyUser, verifyRole } from "../utils/verifyToken.js";
 
 const router = express.Router();
+
+router.get("/count", countUsers);
 
 router.get("/checkauthentication", verifyToken, (req, res, next) => {
   res.send("hello user, you are logged in");
@@ -43,5 +46,8 @@ router.get("/:id", verifyUser, getUser);
 router.get("/", getUsers);
 
 // GET USER COUNT
+
+
+
 
 export default router;

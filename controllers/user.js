@@ -22,7 +22,7 @@ export const deleteUser = async (req,res,next)=>{
 }
 export const getUser = async (req,res,next)=>{
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate('cars').exec();
     res.status(200).json(user);
   } catch (err) {
     next(err);
@@ -36,3 +36,16 @@ export const getUsers = async (req,res,next)=>{
     next(err);
   }
 }
+
+
+export const countUsers = async (req, res, next) => {
+  console.log("zez")
+  try {
+    const userCount = await User.countDocuments();
+    res.status(200).json({ count: userCount });
+  } catch (err) {
+    next(err);
+  }
+}
+
+

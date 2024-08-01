@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get('/nearby', getParkingLotsNearby);
 router.get('/count', countParks); 
-
 router.get('/', getParks);
 router.post('/', createPark);
 router.get('/:id', getParkById);

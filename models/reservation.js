@@ -1,27 +1,34 @@
-import mongoose  from "mongoose";
+import mongoose from "mongoose";
 
 const reservationSchema = new mongoose.Schema({
-  
-  startDate: Date,
-  finishDate: Date,
-  
+  startDate: { type: Date, required: true },
+  finishDate: { type: Date, required: true },
+
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    required: true
   },
 
   park: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Park"
+    ref: "Park",
+    required: true
   },
 
   parkingSpot: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ParkingSpot"
+    ref: "ParkingSpot",
+    required: true
   },
-  
-  totalPrice: Number,
-  payementMethod: {
+
+  totalPrice: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+
+  paymentMethod: {
     type: String,
     enum: [
       'Cash',
@@ -44,7 +51,8 @@ const reservationSchema = new mongoose.Schema({
     ],
     default: 'Cash',
   },
-  payementStatus: {
+
+  paymentStatus: {
     type: String,
     enum: ['Success', 'Declined', 'Hold'],
     default: 'Hold',
@@ -53,14 +61,14 @@ const reservationSchema = new mongoose.Schema({
   reservationStatus: {
     type: String,
     enum: ['Waiting', 'Done', 'Current', 'Canceled'],
-    default: 'Waiting',
+    default: 'Current',
   },
-  
-  licencePlate: String,
+
+  licencePlate: { type: String, trim: true },
+
   reservationDate: { type: Date, default: Date.now },
+  isSubscription: { type: Boolean, default: false } 
 
-
- 
 });
 
 const Reservation = mongoose.model('Reservation', reservationSchema);

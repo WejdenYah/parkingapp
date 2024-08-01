@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   fullname: {
@@ -18,6 +18,14 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Role",
   },
+  cars: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Car'
+  }]
 }, { timestamps: true });
 
-export default mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
+export default User;
+
+
+
