@@ -21,9 +21,9 @@ const parkSchema = new mongoose.Schema({
   },
   longitude: { type: Number, required: true },  // Added required: true
   latitude: { type: Number, required: true },  // Added required: true
-  pricePerHour: { type: Number, required: true, min: 0 },  // Added required: true and min: 0
-  startTime: { type: String, required: true },  // Added required: true
-  endTime: { type: String, required: true },  // Added required: true
+  //pricePerHour: { type: Number, required: true, min: 0 },  // Added required: true and min: 0
+ // startTime: { type: String, required: true },  // Added required: true
+  //endTime: { type: String, required: true },  // Added required: true
   parkingSpots: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "ParkingSpot"

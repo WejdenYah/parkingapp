@@ -5,6 +5,7 @@ import {
   getUser,
   getUsers,
   countUsers,
+  countUsersMonthly,
   
 } from "../controllers/user.js";
 import { verifyToken, verifyUser, verifyRole } from "../utils/verifyToken.js";
@@ -12,6 +13,8 @@ import { verifyToken, verifyUser, verifyRole } from "../utils/verifyToken.js";
 const router = express.Router();
 
 router.get("/count", countUsers);
+
+router.get("/monthly-count", countUsersMonthly);
 
 router.get("/checkauthentication", verifyToken, (req, res, next) => {
   res.send("hello user, you are logged in");

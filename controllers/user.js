@@ -39,7 +39,7 @@ export const getUsers = async (req,res,next)=>{
 
 
 export const countUsers = async (req, res, next) => {
-  console.log("zez")
+  
   try {
     const userCount = await User.countDocuments();
     res.status(200).json({ count: userCount });
@@ -48,4 +48,28 @@ export const countUsers = async (req, res, next) => {
   }
 }
 
+export const countUsersMonthly = async (req, res, next) => {
+  try {
+    const userCounts = await User.aggregate([
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            month: { $month: "$createdAt" }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: {
+          "_id.year": 1,
+          "_id.month": 1
+        }
+      }
+    ]);
 
+    res.status(200).json(userCounts);
+  } catch (err) {
+    next(err);
+  }
+}
